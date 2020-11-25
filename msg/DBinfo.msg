@@ -1,0 +1,13 @@
+int32[20] FrameB
+int32[20] FrameT
+int32[20] TimeB
+int32[20] TimeT
+int32[20] id
+int32[20] Xmin
+int32[20] Ymin
+int32[20] Width
+int32[20] Height
+int32[20] Depth
+int32[20] Yobi
+int32[20] YobiYobi
+int32 cnt
