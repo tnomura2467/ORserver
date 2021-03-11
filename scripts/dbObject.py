@@ -233,8 +233,17 @@ def sqlconnect():
 
     for num in range(objnum):
         im[num] = cv2.imread('data/'+DB_NAME+'/ppmfile/IMAGE_'+str(num)+'.ppm')
-
+	print("im_num")
+	print(im[num])
+	
+    print("im")
+    print(im)
+    print("imtype")
+    print(type(im))
+        
         #Com[Info[num][3]:Info[num][3]+Info[num][5],Info[num][2]:Info[num][2]+Info[num][4]] = im[num]
+
+    
 
 
     #ComCut=Com[100:230,110:290]
@@ -250,6 +259,7 @@ if __name__ == "__main__":
                         help = 'name of DataBase')
 
     args = parser.parse_args()
+    #sqlconnect()
 
     print(args.dbname)
     listener()

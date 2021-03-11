@@ -37,9 +37,9 @@ pub=[None for _ in range(20)]
 
 objnum=0
 # 空の棚の画像取得
-shelf = cv2.imread('data/ImageFile/or2shelf.jpg')
+shelf = cv2.imread('data/ImageFile/newShelf2.jpg')
 #棚の範囲指定
-shelfCut=shelf[128:247,212:282]
+shelfCut=shelf[100:240,220:300]
 
 # HoloLensから"true"という文字がPublishされたらimgPublisher関数に入る
 def callback(data):
@@ -107,7 +107,9 @@ def imgPublisher():
                 imagenum[vecnum]=i
                 DBdata.WhatNo[vecnum]=i
                 idnum=idnum+1
-                vecnum=vecnum+1
+                vecnum=tnomura@triangulum:~$ bash rosbridgeOR2.sh 3
+tnomura@triangulum:~$ 
+vecnum+1
             elif(Info[i][7]==2):
                 idnum=idnum+1"""
 
@@ -147,7 +149,7 @@ def imgPublisher():
             rate.sleep()
         print("finish")
         print('Wait...')
-        cntone=1
+        #cntone=1
     # 再びHoloLensからの合図があるまで待機
 
 # データベースにアクセスし物体の情報を取得する関数

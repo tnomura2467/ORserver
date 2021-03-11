@@ -54,6 +54,7 @@ add_message_files(
    restest.msg
    YoloRes.msg
    DBinfo.msg
+   TransformInfo.msg
 #   Message1.msg
 #   Message2.msg
 )
