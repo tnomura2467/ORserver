@@ -27,14 +27,18 @@ import os
 from time import sleep
 
 print('Start!!')
+# 11 × 20 の配列を作成 | DBデータを保持
 Info=[[0 for i in range(11)] for j in range(20)]
+# 20 の配列を作成 | 画像データを保持
 imagenum=[None for _ in range(20)]
+# 20 の配列を作成 | publishするメッセージを保持
 msg=[None for _ in range(20)]
 cntone=0
 
+# 20 の配列を作成 | publisherの内容を保持
 pub=[None for _ in range(20)]
 
-
+# オブジェクトの数
 objnum=0
 # 空の棚の画像取得
 shelf = cv2.imread('data/ImageFile/or2shelf.jpg')
@@ -63,19 +67,7 @@ def imgPublisher():
     image=sqlconnect()
     rospy.init_node('ShelfPub', anonymous=True)
     pubshelf = rospy.Publisher('shelfori',Image, queue_size=10)
-
-    """pub = rospy.Publisher('shelfimg',Image, queue_size=10)
-    pub2 = rospy.Publisher('shelfimg2',Image, queue_size=10)
-    pub3 = rospy.Publisher('shelfimg3',Image, queue_size=10)"""
-    """pub[0]=rospy.Publisher('shelfimg',Image, queue_size=10)
-    pub[1]=rospy.Publisher('shelfimg2',Image, queue_size=10)
-    pub[2]=rospy.Publisher('shelfimg3',Image, queue_size=10)"""
-
-
-
-    #numpub = rospy.Publisher('shelfnum',String, queue_size=10)
     DBpub = rospy.Publisher('shelfDB',DBinfo, queue_size=10)
-
 
     bridge = CvBridge()
     DBdata=DBinfo()
@@ -83,6 +75,7 @@ def imgPublisher():
     vecnum=0
 
     dbcnt=0
+    #　データベースの情報を送信するデータに格納
     for i in range(20):
         DBdata.FrameB[i]=Info[i][0]
         DBdata.FrameT[i]=Info[i][1]
@@ -101,20 +94,8 @@ def imgPublisher():
         dbcnt=dbcnt+1
 
 
-
-        """if(Info[i][1]==idnum):
-            if(Info[i][7]==1):
-                imagenum[vecnum]=i
-                DBdata.WhatNo[vecnum]=i
-                idnum=idnum+1
-                vecnum=vecnum+1
-            elif(Info[i][7]==2):
-                idnum=idnum+1"""
-
     DBdata.cnt=dbcnt
     print(DBdata.cnt)
-    #print(DBdata.WhatNo[0])
-    #print(DBdata.WhatNo[1])
     for i in range(0,DBdata.cnt):
         pub[i]=rospy.Publisher('shelfimg'+str(i),Image, queue_size=10)
 
@@ -123,12 +104,6 @@ def imgPublisher():
         #print(imagenum[i])
         msg[i] = bridge.cv2_to_imgmsg(image[i], encoding="bgr8")
 
-    """
-    print(imagenum[1])
-    msg2 = bridge.cv2_to_imgmsg(image[imagenum[1]], encoding="bgr8")
-    print(type(image[4]))
-    msg3 = bridge.cv2_to_imgmsg(image[imagenum[2]], encoding="bgr8")
-    """
 
     if(cntone==0):
     # まず物体のサイズや座標などの情報をpublish
@@ -244,10 +219,6 @@ def sqlconnect():
         #Com[Info[num][3]:Info[num][3]+Info[num][5],Info[num][2]:Info[num][2]+Info[num][4]] = im[num]
 
     
-
-
-    #ComCut=Com[100:230,110:290]
-    #ComCut=Com[100:230,110:190]
     return im
 
 if __name__ == "__main__":
